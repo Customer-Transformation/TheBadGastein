@@ -1,11 +1,3 @@
 Gameplay
 Menu not available on first character select?
-Disable trail on jump
-
-
-Cutscene
-Name
-Avatar
-Play
-Leaderboard
-Main/Avatar | Play again
+RenderTex model ratio
