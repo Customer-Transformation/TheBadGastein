@@ -1,8 +1,6 @@
-Disable trail on jump
-Cutscene
+Gameplay
 Menu not available on first character select?
-Text name retention and score on load again
-    on authenticted check if player name exists, if not go to name and remove score
+Disable trail on jump
 
 
 Cutscene
