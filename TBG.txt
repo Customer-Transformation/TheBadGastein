@@ -1,3 +1,9 @@
-Gameplay
-Menu not available on first character select?
-RenderTex model ratio
+?
+    Menu not available on first character select?
+    Store model in metdata?
+!
+    Intro screen
+    Gameplay balancing
+    RenderTex model ratio
+    Player screen edge robustness
+    Player collider on skis or update
