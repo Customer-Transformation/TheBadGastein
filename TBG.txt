@@ -1,9 +1,9 @@
 ?
     Menu not available on first character select?
     Store model in metdata?
+    RenderTex model ratio
 !
     Intro screen
     Gameplay balancing
-    RenderTex model ratio
-    Player screen edge robustness
-    Player collider on skis or update
+    Ski audio
+    Larger snowFX
