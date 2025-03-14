@@ -1,33 +1,31 @@
 const cacheName = "CustomerTransformation-TheBadGastein-0.4.0";
 const contentToCache = [
-    "Build/DopeSlopes.loader.js",
-    "Build/DopeSlopes.framework.js",
-    "Build/DopeSlopes.data",
-    "Build/DopeSlopes.wasm",
-    "TemplateData/style.css"
-
+  "Build/DopeSlopes.loader.js",
+  "Build/DopeSlopes.framework.js",
+  "Build/DopeSlopes.data",
+  "Build/DopeSlopes.wasm",
+  "TemplateData/style.css"
 ];
 
-self.addEventListener('install', function (e) {
-    console.log('[Service Worker] Install');
-    
-    e.waitUntil((async function () {
+// Cache core files on install
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    (async () => {
       const cache = await caches.open(cacheName);
-      console.log('[Service Worker] Caching all: app shell and content');
       await cache.addAll(contentToCache);
-    })());
+      console.log("[SW] Cached core Unity files");
+    })()
+  );
 });
 
-self.addEventListener('fetch', function (e) {
-    e.respondWith((async function () {
-      let response = await caches.match(e.request);
-      console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
-      if (response) { return response; }
+// Always fetch from network except for those core files
+self.addEventListener("fetch", (e) => {
+  // If it's one of our pre-cached files, serve from cache
+  if (contentToCache.some((url) => e.request.url.endsWith(url))) {
+    e.respondWith(caches.match(e.request));
+    return;
+  }
 
-      response = await fetch(e.request);
-      const cache = await caches.open(cacheName);
-      console.log(`[Service Worker] Caching new resource: ${e.request.url}`);
-      cache.put(e.request, response.clone());
-      return response;
-    })());
+  // Everything else always goes to the network
+  e.respondWith(fetch(e.request));
 });
