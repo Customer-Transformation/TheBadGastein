@@ -1,7 +1,8 @@
 {
     "name": "TheBadGastein",
     "short_name": "TheBadGastein",
-    "start_url": "index.html",
+    "start_url": "https://customer-transformation.github.io/TheBadGastein/index.html",
+    "scope": "https://customer-transformation.github.io/TheBadGastein/",
     "display": "fullscreen",
     "background_color": "#231F20",
     "theme_color": "#000",

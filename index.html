@@ -8,8 +8,7 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <!-- For iOS users, specify an Apple touch icon if you have one -->
-    <!-- <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" /> -->
+    <link rel="apple-touch-icon" href="TemplateData/icons/unity-logo-dark.png" />
   </head>
   <body>
     <!-- Instructions for installing to Home Screen (shown when NOT in standalone mode) -->
@@ -85,7 +84,7 @@
 
       // If the user is in PWA mode, we also register the Service Worker
       window.addEventListener('load', function () {
-        if ('serviceWorker' in navigator && isInStandaloneMode()) {
+        if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('ServiceWorker.js');
         }
       });
