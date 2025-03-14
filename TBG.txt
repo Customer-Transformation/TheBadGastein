@@ -7,3 +7,4 @@
     Gameplay balancing
     Ski audio
     Larger snowFX
+    Check screen sizing issues
