@@ -6,27 +6,32 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico" />
     <link rel="stylesheet" href="TemplateData/style.css" />
     <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- For iOS users, specify an Apple touch icon if you have one -->
+    <!-- <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" /> -->
   </head>
   <body>
-    <!-- Button to unlock audio. Initially visible, then hidden after click -->
-    <button id="start-button" style="
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 999;
-      padding: 1em 2em;
-      font-size: 1.2em;
-      cursor: pointer;
-    ">
-      Start Game
-    </button>
+    <!-- Instructions for installing to Home Screen (shown when NOT in standalone mode) -->
+    <div
+      id="install-instructions"
+      style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;"
+    >
+      <h2>Install This App</h2>
+      <p>
+        Add this app to your Home Screen to unlock the best full-screen experience.
+      </p>
+      <p>
+        <strong>Instructions (Safari iOS):</strong><br />
+        1. Tap the <em>Share</em> icon (the box with an up arrow).<br />
+        2. Select <em>Add to Home Screen</em> from the menu.<br />
+        3. Then launch from your Home Screen.
+      </p>
+    </div>
 
-    <!-- Hidden audio element just like in your old template -->
-    <audio id="unlock-audio" src="audioRam.wav" style="display: none;"></audio>
-
+    <!-- Unity Container (shown only in standalone/PWA mode) -->
     <div id="unity-container" style="display: none;">
-      <canvas id="unity-canvas" width="2556" height="1179" tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width="1179" height="2379" tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -36,32 +41,71 @@
       <div id="unity-warning"></div>
     </div>
 
+    <!-- Start Button (unlock audio) is only relevant in PWA mode -->
+    <button
+      id="start-button"
+      style="
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        padding: 1em 2em;
+        font-size: 1.2em;
+        cursor: pointer;
+      "
+    >
+      Start Game
+    </button>
+
+    <!-- Hidden audio element to unlock Web Audio -->
+    <audio id="unlock-audio" src="audioRam.wav" style="display: none;"></audio>
+
     <script>
-      // Register the Service Worker for PWA
-      window.addEventListener("load", function () {
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.register("ServiceWorker.js");
+      // Utility function to detect if we’re in “standalone” (PWA) mode on iOS or other platforms
+      function isInStandaloneMode() {
+        return (
+          window.matchMedia('(display-mode: standalone)').matches ||
+          (typeof navigator.standalone !== 'undefined' && navigator.standalone)
+        );
+      }
+
+      // Show/hide the correct UI based on whether we're installed or not
+      window.addEventListener('DOMContentLoaded', function () {
+        if (isInStandaloneMode()) {
+          // PWA mode
+          document.getElementById('install-instructions').style.display = 'none';
+          document.getElementById('start-button').style.display = 'block';
+        } else {
+          // Safari or normal browser tab
+          document.getElementById('install-instructions').style.display = 'block';
         }
       });
 
-      var container = document.querySelector("#unity-container");
-      var canvas = document.querySelector("#unity-canvas");
-      var loadingBar = document.querySelector("#unity-loading-bar");
-      var progressBarFull = document.querySelector("#unity-progress-bar-full");
-      var warningBanner = document.querySelector("#unity-warning");
+      // If the user is in PWA mode, we also register the Service Worker
+      window.addEventListener('load', function () {
+        if ('serviceWorker' in navigator && isInStandaloneMode()) {
+          navigator.serviceWorker.register('ServiceWorker.js');
+        }
+      });
+
+      var container = document.querySelector('#unity-container');
+      var canvas = document.querySelector('#unity-canvas');
+      var loadingBar = document.querySelector('#unity-loading-bar');
+      var progressBarFull = document.querySelector('#unity-progress-bar-full');
+      var warningBanner = document.querySelector('#unity-warning');
 
       function unityShowBanner(msg, type) {
         function updateBannerVisibility() {
-          warningBanner.style.display = warningBanner.children.length
-            ? "block"
-            : "none";
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
         }
-        var div = document.createElement("div");
+        var div = document.createElement('div');
         div.innerHTML = msg;
         warningBanner.appendChild(div);
-        if (type == "error") div.style = "background: red; padding: 10px;";
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
         else {
-          if (type == "warning") div.style = "background: yellow; padding: 10px;";
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
           setTimeout(function () {
             warningBanner.removeChild(div);
             updateBannerVisibility();
@@ -70,58 +114,61 @@
         updateBannerVisibility();
       }
 
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/DopeSlopes.loader.js";
+      var buildUrl = 'Build';
+      var loaderUrl = buildUrl + '/DopeSlopes.loader.js';
       var config = {
-        dataUrl: buildUrl + "/DopeSlopes.data",
-        frameworkUrl: buildUrl + "/DopeSlopes.framework.js",
-        codeUrl: buildUrl + "/DopeSlopes.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "CustomerTransformation",
-        productName: "TheBadGastein",
-        productVersion: "0.4.0",
-        showBanner: unityShowBanner
+        dataUrl: buildUrl + '/DopeSlopes.data',
+        frameworkUrl: buildUrl + '/DopeSlopes.framework.js',
+        codeUrl: buildUrl + '/DopeSlopes.wasm',
+        streamingAssetsUrl: 'StreamingAssets',
+        companyName: 'CustomerTransformation',
+        productName: 'TheBadGastein',
+        productVersion: '0.4.0',
+        showBanner: unityShowBanner,
       };
 
-      // If mobile, add a meta tag for viewport
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        var meta = document.createElement("meta");
-        meta.name = "viewport";
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
         meta.content =
-          "width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes";
-        document.getElementsByTagName("head")[0].appendChild(meta);
+          'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
       }
 
-      loadingBar.style.display = "none"; // Hide loading bar until we start Unity
+      // Hide the loading bar by default; we only show it once user clicks "Start Game"
+      loadingBar.style.display = 'none';
 
-      // Reference to our unlock-audio and start-button
-      var unlockAudio = document.getElementById("unlock-audio");
-      var startButton = document.getElementById("start-button");
+      // Wait for user click in PWA mode to "unlock" audio and create Unity
+      var unlockAudio = document.getElementById('unlock-audio');
+      var startButton = document.getElementById('start-button');
 
-      // Wait for user click to "unlock" audio
-      startButton.addEventListener("click", function () {
-        unlockAudio.play().then(() => {
-          // Audio unlocked successfully
-          startButton.style.display = "none";       // Hide the button
-          container.style.display = "block";        // Show the Unity container
-          loadingBar.style.display = "block";       // Show loading progress bar
+      startButton.addEventListener('click', function () {
+        unlockAudio
+          .play()
+          .then(() => {
+            // Audio has been unlocked
+            startButton.style.display = 'none';
+            container.style.display = 'block'; // Show Unity container
+            loadingBar.style.display = 'block'; // Show the loading bar
 
-          // Now load Unity
-          var script = document.createElement("script");
-          script.src = loaderUrl;
-          script.onload = () => {
-            createUnityInstance(canvas, config, (progress) => {
-              progressBarFull.style.width = 100 * progress + "%";
-            }).then((unityInstance) => {
-              loadingBar.style.display = "none";
-            }).catch((message) => {
-              alert(message);
-            });
-          };
-          document.body.appendChild(script);
-        }).catch((err) => {
-          console.warn("Audio unlock failed:", err);
-        });
+            var script = document.createElement('script');
+            script.src = loaderUrl;
+            script.onload = () => {
+              createUnityInstance(canvas, config, (progress) => {
+                progressBarFull.style.width = 100 * progress + '%';
+              })
+                .then((unityInstance) => {
+                  loadingBar.style.display = 'none';
+                })
+                .catch((message) => {
+                  alert(message);
+                });
+            };
+            document.body.appendChild(script);
+          })
+          .catch((err) => {
+            console.warn('Audio unlock failed:', err);
+          });
       });
     </script>
   </body>
