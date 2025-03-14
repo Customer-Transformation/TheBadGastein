@@ -7,6 +7,17 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <link rel="manifest" href="manifest.webmanifest">
+    
+    <!-- Add these important meta tags -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TheBadGastein">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Add home screen icons -->
+    <link rel="apple-touch-icon" href="TemplateData/icons/unity-logo-dark.png">
   </head>
   <body>
     <div id="unity-container">
@@ -18,20 +29,44 @@
         </div>
       </div>
       <div id="unity-warning"> </div>
+      
+      <!-- Add instructions for adding to home screen (can be styled and positioned as needed) -->
+      <div id="install-prompt" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 15px; border-radius: 10px; text-align: center; z-index: 1000;">
+        Add this game to your home screen for the best experience:<br>
+        Tap <strong>Share</strong> <span style="font-size: 1.2em;">↑</span> then <strong>Add to Home Screen</strong>
+      </div>
     </div>
     <script>
       window.addEventListener("load", function () {
         if ("serviceWorker" in navigator) {
           navigator.serviceWorker.register("ServiceWorker.js");
         }
+        
+        // Show install prompt if not in standalone mode
+        if (("standalone" in navigator) && !navigator.standalone) {
+          document.getElementById("install-prompt").style.display = "block";
+          // Hide after 10 seconds
+          setTimeout(function() {
+            document.getElementById("install-prompt").style.display = "none";
+          }, 10000);
+        }
       });
-
+      
+      // Add resize handler to ensure canvas fills the screen
+      window.addEventListener('resize', function() {
+        var canvas = document.getElementById('unity-canvas');
+        if (canvas) {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+      });
+      
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var warningBanner = document.querySelector("#unity-warning");
-
+      
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
       // If type=='warning', a yellow highlight color is used.
@@ -55,7 +90,6 @@
         }
         updateBannerVisibility();
       }
-
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/DopeSlopes.loader.js";
       var config = {
@@ -69,24 +103,28 @@
         productVersion: "0.4.0",
         showBanner: unityShowBanner,
       };
-
+      
+      // Force canvas to match screen size
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      
       // By default Unity keeps WebGL canvas render target size matched with
       // the DOM size of the canvas element (scaled by window.devicePixelRatio)
       // Set this to false if you want to decouple this synchronization from
       // happening inside the engine, and you would instead like to size up
       // the canvas DOM size and WebGL render target sizes yourself.
       // config.matchWebGLToCanvasSize = false;
-
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
-      }
-
+      
+      // Remove this conditional since we're adding meta tags directly
+      // if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      //   // Mobile device style: fill the whole browser client area with the game canvas:
+      //   var meta = document.createElement('meta');
+      //   meta.name = 'viewport';
+      //   meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+      //   document.getElementsByTagName('head')[0].appendChild(meta);
+      // }
+      
       loadingBar.style.display = "block";
-
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
