@@ -1,17 +1,17 @@
 {
-    "name": "TheBadGastein",
-    "short_name": "TheBadGastein",
-    "start_url": "https://customer-transformation.github.io/TheBadGastein/index.html",
-    "scope": "https://customer-transformation.github.io/TheBadGastein/",
-    "display": "fullscreen",
-    "background_color": "#231F20",
-    "theme_color": "#000",
-    "description": "TheBadGastein",
-    "orientation": "portrait",
-    "icons": [{
-      "src": "TemplateData/icons/unity-logo-dark.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }]
-  }
+  "name": "TheBadGastein",
+  "short_name": "TheBadGastein",
+  "start_url": "https://customer-transformation.github.io/TheBadGastein/index.html",
+  "scope": "https://customer-transformation.github.io/TheBadGastein/",
+  "display": "fullscreen",
+  "background_color": "#231F20",
+  "theme_color": "#000",
+  "description": "TheBadGastein",
+  "orientation": "portrait",
+  "icons": [{
+    "src": "TemplateData/icons/unity-logo-dark.png",
+    "sizes": "144x144",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }]
+}
