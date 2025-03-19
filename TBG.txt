@@ -1,10 +1,10 @@
 ?
     Menu not available on first character select?
     Store model in metdata?
-    RenderTex model ratio
 !
     Intro screen
     Gameplay balancing
-    Ski audio
-    Larger snowFX
-    FInger showing slider UI and score and such
+    Splash audio
+    SpeedFX
+    Yeti ROar FX
+    Outrun Yeti
