@@ -3,8 +3,7 @@
     Store model in metdata?
 !
     Intro screen
-    Gameplay balancing
     Splash audio
     SpeedFX
-    Yeti ROar FX
-    Outrun Yeti
+    Typewriter
+    Collide VFX
