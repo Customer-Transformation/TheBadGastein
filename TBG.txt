@@ -2,8 +2,11 @@
     Menu not available on first character select?
     Store model in metdata?
 !
-    Intro screen
     Splash audio
+    Type audio
     SpeedFX
-    Typewriter
-    Collide VFX
+    Splahs screen/icon
+
+Last
+    Remove debug logs
+    
