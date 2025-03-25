@@ -6,7 +6,8 @@
     Type audio
     SpeedFX
     Splahs screen/icon
-
+    Spawn texture heaps
 Last
     Remove debug logs
+    Squishy buttons
     
