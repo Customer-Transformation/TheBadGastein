@@ -7,7 +7,11 @@
     SpeedFX
     Splahs screen/icon
     Spawn texture heaps
+
 Last
     Remove debug logs
     Squishy buttons
-    
+    Loading icon
+    Splash icon
+    PWA icon
+    Browser specific instructions
