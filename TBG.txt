@@ -4,11 +4,6 @@
 !
     SpeedFX
     Splahs screen/icon
-    Parallax clouds
-    Yeti fast after crash
-    Menu music on just model screen?
-    Snowflake skewedness
-    Smaller rocks
 
 Last
     Remove debug logs
