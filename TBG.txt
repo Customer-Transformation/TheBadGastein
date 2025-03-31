@@ -3,7 +3,6 @@
     Store model in metdata?
 !
     SpeedFX
-    Typing sounds
     Game leaderboard backgorund obj/background
 Last
     Remove debug logs
