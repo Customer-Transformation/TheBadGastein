@@ -9,7 +9,7 @@
   "description": "TheBadGastein",
   "orientation": "portrait",
   "icons": [{
-    "src": "TemplateData/icons/unity-logo-dark.png",
+    "src": "TemplateData/icons/logo.png",
     "sizes": "144x144",
     "type": "image/png",
     "purpose": "any maskable"
