@@ -3,7 +3,11 @@
     Store model in metdata?
 !
     SpeedFX
+    Typing sounds
     Splahs screen/icon
+    Shadow field points
+    Game leaderboard backgorund obj/background
+    Move camera on game end
 
 Last
     Remove debug logs
