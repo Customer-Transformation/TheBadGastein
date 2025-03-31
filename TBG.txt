@@ -4,7 +4,6 @@
 !
     SpeedFX
     Typing sounds
-    Splahs screen/icon
     Game leaderboard backgorund obj/background
 Last
     Remove debug logs
