@@ -5,8 +5,6 @@
     SpeedFX
 Last
     Remove debug logs
-    Browser specific instructions
     Name length
     Name identifis winner info?
-    "Quality assurance" credits
     PWA start button + bakcground
