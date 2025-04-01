@@ -8,12 +8,10 @@ body { padding: 0; margin: 0 }
 #unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
 
 #install-instructions {
-  background-color: #f9f9f9;
+  margin: 20px;
   padding: 20px;
   border-radius: 8px;
-  font-family: Arial, sans-serif; /* Use the custom font here */
-  color: #333;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
 #install-instructions h2 {
