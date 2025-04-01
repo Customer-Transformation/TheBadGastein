@@ -11,20 +11,42 @@
     <link rel="apple-touch-icon" href="TemplateData/icons/logo.png" />
   </head>
   <body>
-    <!-- Instructions for installing to Home Screen (shown when NOT in standalone mode) -->
+    <!-- Instructions for installing on iPhone 15 (Safari, Chrome, Firefox) -->
     <div
       id="install-instructions"
-      style="display: none; position: absolute; width: 80%; height: 80%; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;"
+      style="display: none;"
     >
       <h2>Install This App</h2>
       <p>
-        Add this app to your Home Screen to unlock the best full-screen experience.
+        Follow the steps below to add this app to your Home Screen for a fullscreen PWA experience.
+        As methods may vary between browser versions, please try another browser or update the 
+        browser version if you are unable to install.
       </p>
+
+      <!-- Safari on iPhone -->
       <p>
-        <strong>Instructions (Safari iOS):</strong><br />
-        1. Tap the <em>Share</em> icon (the box with an up arrow).<br />
-        2. Select <em>Add to Home Screen</em> from the menu.<br />
-        3. Then launch from your Home Screen.
+        <strong>Safari (iOS):</strong><br />
+        1. Tap the <em>Share</em> icon (a box with an up arrow).<br />
+        2. Choose <em>Add to Home Screen</em> in the share menu.<br />
+        3. Launch the app from your Home Screen.
+      </p>
+
+      <!-- Chrome on iPhone -->
+      <p>
+        <strong>Google Chrome (iOS):</strong><br />
+        1. Tap the <em>Share</em> icon (a box with an up arrow. On iOS, typically found in the top right 
+          or bottom search bar).<br />
+        2. Select <em>Add to Home Screen</em> in the iOS share sheet.<br />
+        3. Launch the app from your Home Screen.
+      </p>
+
+      <!-- Firefox on iPhone -->
+      <p>
+        <strong>Firefox (iOS):</strong><br />
+        1. Tap the menu button (three lines or dots at the bottom).<br />
+        2. Select <em>Share</em> (or <em>Add to Home Screen</em> if directly available).<br />
+        3. Tap <em>Add to Home Screen</em> in the iOS share menu.<br />
+        4. Launch the app from your Home Screen.
       </p>
     </div>
 
@@ -77,12 +99,12 @@
           document.getElementById('install-instructions').style.display = 'none';
           document.getElementById('start-button').style.display = 'block';
         } else {
-          // Safari or normal browser tab
+          // Normal browser tab
           document.getElementById('install-instructions').style.display = 'block';
         }
       });
 
-      // If the user is in PWA mode, we also register the Service Worker
+      // If the user is in PWA mode, register the Service Worker
       window.addEventListener('load', function () {
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('ServiceWorker.js');
@@ -134,10 +156,10 @@
         document.getElementsByTagName('head')[0].appendChild(meta);
       }
 
-      // Hide the loading bar by default; we only show it once user clicks "Start Game"
+      // Hide the loading bar by default
       loadingBar.style.display = 'none';
 
-      // Wait for user click in PWA mode to "unlock" audio and create Unity
+      // Wait for user click in PWA mode to "unlock" audio and then create Unity
       var unlockAudio = document.getElementById('unlock-audio');
       var startButton = document.getElementById('start-button');
 
