@@ -3,11 +3,10 @@
     Store model in metdata?
 !
     SpeedFX
-    Game leaderboard backgorund obj/background
 Last
     Remove debug logs
-    Squishy buttons
-    Loading icon
-    Splash icon
-    PWA icon
     Browser specific instructions
+    Name length
+    Name identifis winner info?
+    "Quality assurance" credits
+    PWA start button + bakcground
