@@ -1,10 +1,5 @@
-?
-    Menu not available on first character select?
-    Store model in metdata?
-!
-    SpeedFX
-Last
-    Remove debug logs
-    Name length
-    Name identifis winner info?
-    PWA start button + bakcground
+open prefab
+new anim clip
+record
+change
+
