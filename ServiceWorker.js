@@ -1,4 +1,4 @@
-const cacheName = "CustomerTransformation-TheBadGastein-2.1.0";
+const cacheName = "CustomerTransformation-TheBadGastein-2.1.1";
 const contentToCache = [
   "Build/DopeSlopes.loader.js",
   "Build/DopeSlopes.framework.js",
