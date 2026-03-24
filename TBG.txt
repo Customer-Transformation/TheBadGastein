@@ -1,5 +1,6 @@
-open prefab
-new anim clip
-record
-change
-
+records
+    PENG 11800
+    JESPER 9500
+    BERLN 9400
+    FREDRIJ 8200
+    WILLIAM 7100
